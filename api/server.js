@@ -1,14 +1,19 @@
 const express = require("express");
 const fs = require("fs");
+const writeStream = fs.createWriteStream("post.csv");
 const request = require("request");
 const cheerio = require("cheerio");
 const app = express();
 
-app.get("/scrape", function(req, res) {
+// Write headers
+// writeStream.write();
+
+app.get("/p4p", function(req, res) {
   // The URL we will scrape from - in our example Anchorman 2.
 
   url = "https://www.ringtv.com/ratings/?weightclass=251";
-
+  let names = [];
+  let fighters = [];
   // The structure of our request call
   // The first parameter is our URL
   // The callback function takes 3 parameters, an error, response status code and the html
@@ -22,7 +27,6 @@ app.get("/scrape", function(req, res) {
       let $ = cheerio.load(html);
 
       // Finally, we'll define the variables we're going to capture
-      let names = [];
       //   let name, rank, record, nationality, titles;
       const rank = $(".number");
       let getName = $(".name").each((i, el) => {
@@ -30,13 +34,28 @@ app.get("/scrape", function(req, res) {
         //   .find(".name")
         //   .text();
         names.push(name);
-        console.log(names);
+        // console.log(names);
       });
 
+      let getFighters = $(".fighter-link").each((i, el) => {
+        fightersName = $(el)
+          .find(".name")
+          .text();
+        fighterRank = $(el)
+          .find(".number")
+          .text();
+        fighterTitles = $(el)
+          .find(".wcat")
+          .text();
+
+        fighters[i] = { fighterRank, fightersName, fighterTitles };
+      });
+      console.log(fighters);
       //   console.log(getName.text());
       //   let json = { name: "", rank: "", record: "", nationality: "", titles: [] };
       //   console.log(rank.html());
     }
+    // return names;
   });
 });
 
