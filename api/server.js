@@ -47,8 +47,16 @@ app.get("/p4p", function(req, res) {
         fighterTitles = $(el)
           .find(".wcat")
           .text();
+        fighterRecord = $(el)
+          .find(".fighter-link div:nth-child(5)")
+          .text();
 
-        fighters[i] = { fighterRank, fightersName, fighterTitles };
+        fighters[i] = {
+          fighterRank,
+          fightersName,
+          fighterTitles,
+          fighterRecord
+        };
       });
       console.log(fighters);
       //   console.log(getName.text());
@@ -62,15 +70,3 @@ app.get("/p4p", function(req, res) {
 // app.listen("8081");
 // console.log("Magic happens on port 8081");
 exports = module.exports = app;
-
-{
-  /* <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-<div class="white-box fighter-link" data-url="https://www.ringtv.com/fighters/canelo-alvarez/">
-<div class="imagebox">
-<div class="number"><span>1</span></div>
-<img src="https://www.ringtv.com/wp-content/uploads/2016/07/canelo-e1473365393257-270x270.jpg" alt="Canelo Alvarez">
-</div>
-<div class="name">Canelo Alvarez</div>
-<div class="wcat">RING, IBF, WBA middleweight</div> <div class="info">country: Mexico</div> <div class="info">53-1-2 (36 KOs)</div> <div class="info">WEEKS ON LIST: 78</div> </div>
-</div> */
-}
