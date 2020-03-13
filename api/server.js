@@ -5,12 +5,7 @@ const request = require("request");
 const cheerio = require("cheerio");
 const app = express();
 
-// Write headers
-// writeStream.write();
-
 app.get("/p4p", function(req, res) {
-  // The URL we will scrape from - in our example Anchorman 2.
-
   url = "https://www.ringtv.com/ratings/?weightclass=251";
   let names = [];
   let fighters = [];
@@ -67,6 +62,4 @@ app.get("/p4p", function(req, res) {
   });
 });
 
-// app.listen("8081");
-// console.log("Magic happens on port 8081");
 exports = module.exports = app;
